@@ -1,0 +1,19 @@
+{
+  "name": "ClassDojoAssignment",
+  "version": "0.0.0",
+  "homepage": "https://github.com/austentalbot/ClassDojoAssignment",
+  "authors": [
+    "Austen Talbot <austentalbot@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+
+  }
+}

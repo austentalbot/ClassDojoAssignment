@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+  <script src="./bower_components/angular/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+
 
   <script src="app.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
@@ -21,6 +22,7 @@
       <div>Rating: {{book.average_rating[0]}}/5 ({{book.ratings_count[0]}} Ratings)</div>
       <div>{{book.text_reviews_count[0]._}} Reviews</div>
     </ul> -->
+    <canvas id="myChart" width="400" height="400"></canvas>
   </div>
 </body>
 </html>
