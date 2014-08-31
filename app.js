@@ -12,10 +12,7 @@ app.controller('load', function($http, $scope) {
         var award = data.awards[i];
         //initialize empty objects for student and time details
         if (!(award.classroom in classes)) {
-          classes[award.classroom]={students: {}, times: {
-            0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0,
-            12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0
-          }};
+          classes[award.classroom]={students: {}, times: Array.apply(null, new Array(24)).map(Number.prototype.valueOf,0)}
         }
         //fill in student details
         if (!(award.student in classes[award.classroom].students)) {
@@ -31,37 +28,31 @@ app.controller('load', function($http, $scope) {
       };
 
       console.log(classes);
+    
+      var nums=[];
+      for (var i=0; i<24; i++) {
+        nums.push(moment(i, 'H').format('h a'));
+      }
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var data = {
+          labels: nums,
+          datasets: [
+              {
+                  label: "My First dataset",
+                  fillColor: "rgba(220,220,220,0.2)",
+                  strokeColor: "rgba(220,220,220,1)",
+                  pointColor: "rgba(220,220,220,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: classes.Biology.times
+              }
+          ]
+      };
+      var myLineChart = new Chart(ctx).Line(data);
+
     });
-  
-    var ctx = document.getElementById("myChart").getContext("2d");
 
-    var data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
-            }
-        ]
-    };  
-
-    var myLineChart = new Chart(ctx).Line(data);
 
 
 
