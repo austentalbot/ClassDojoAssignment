@@ -87,9 +87,11 @@ app.controller('load', function($http, $scope) {
       var lineChart = new Chart(ctx).Line(data, options);
     };
 
+    $scope.resizeCanvas = function() {
+      
+    };
 
   };
 
 
 });
-

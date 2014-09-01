@@ -29,6 +29,7 @@
     .badLabel {
       color: #F29A3F;
     }
+
   </style>
 <head>
 </head>
@@ -38,13 +39,14 @@
     <div class='goodSquare'></div> <div class='goodLabel'>Good behavior</div>
     <div class='badSquare'></div> <div class='badLabel'>Bad behavior</div>
     <ul ng-repeat='(course, content) in classes'>
-      <div>{{course}}</div>
-      <canvas id={{course}} width={{document.documentElement.clientWidth/2.5}} height="100"></canvas>
-      {{createTimeline(course, content)}}
-      <ul ng-repeat='(name, scores) in content.students'>
-        <li>{{name}}: <span class='goodLabel'> {{scores.good}}</span> | <span class='badLabel'>{{scores.bad}}</span></li>
-      </ul>
-
+      <div ng-click="showDetails = !showDetails; resizeCanvas();">{{course}}</div>
+      <div ng-show='showDetails'>
+        <canvas id={{course}} width={{document.documentElement.clientWidth/2.5}} height="100"></canvas>
+        {{createTimeline(course, content)}}
+        <ul ng-repeat='(name, scores) in content.students'>
+          <li>{{name}}: <span class='goodLabel'> {{scores.good}}</span> | <span class='badLabel'>{{scores.bad}}</span></li>
+        </ul>
+      </div>
     </ul>
   </div>
 </body>
