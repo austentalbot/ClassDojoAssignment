@@ -15,9 +15,11 @@ body {
 }
 .goodLabel {
   color: #44BF87;
+  font-size: 1.1em;
 }
 .badLabel {
   color: #F29A3F;
+  font-size: 1.1em;
 }
 
 .button {

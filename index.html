@@ -12,9 +12,7 @@
 </head>
 <body>
   <div ng-app='dojo' ng-controller='load' ng-init='queryDojo()'>
-    <h3>Aggregate good and bad behavior by time of day</h3>
-    <div class='goodSquare'></div> <div class='goodLabel'>Good behavior</div>
-    <div class='badSquare'></div> <div class='badLabel'>Bad behavior</div>
+    <h2>Classroom dashboard</h2>
     <div class="spinner">
       <div class="rect1"></div>
       <div class="rect2"></div>
@@ -25,8 +23,10 @@
     <ul ng-repeat='(course, content) in classes'>
       <div class='button' ng-click="showDetails = !showDetails;">{{course}}</div>
       <div ng-show='showDetails'>
+        <h4>Classroom <span class='goodLabel'>good</span> and <span class='badLabel'>bad</span> behavior by time of day</h4>
         <canvas id={{course}}></canvas>
         {{createTimeline(course, content)}}
+        <h4>Student <span class='goodLabel'>good</span> and <span class='badLabel'>bad</span> behavior breakdown</h4>
         <ul ng-repeat='(name, scores) in content.students'>
           <li>{{name}}: <span class='goodLabel'> {{scores.good}}</span> | <span class='badLabel'>{{scores.bad}}</span></li>
         </ul>
