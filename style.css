@@ -1,0 +1,96 @@
+body {
+  font-family: 'Open Sans';
+}
+.goodSquare {
+  width: 20px;
+  height: 20px;
+  background-color: #44BF87;
+  float: left;
+}
+.badSquare {
+  width: 20px;
+  height: 20px;
+  background-color: #F29A3F;
+  float: left;
+}
+.goodLabel {
+  color: #44BF87;
+}
+.badLabel {
+  color: #F29A3F;
+}
+
+.button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #3AB6B5;
+  color: white;
+  padding: 1px 1px 1px 1px;
+  width: 90px;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #44C0BF;
+}
+.button:active {
+  background-color: #219D9C;
+}
+
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.spinner > div {
+  background-color: #3AB6B5;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  } 20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}

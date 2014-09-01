@@ -63,7 +63,7 @@ app.controller('load', function($http, $scope) {
         scaleFontFamily: "'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
       };
       var ctx = document.getElementById(name).getContext("2d");
-      ctx.canvas.width = 600;
+      ctx.canvas.width = window.innerWidth/1.2;
       ctx.canvas.height = 300;
       var data = {
         labels: nums,
