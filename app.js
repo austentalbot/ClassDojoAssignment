@@ -7,7 +7,6 @@ app.controller('load', function($http, $scope) {
       url: 'http://teach.classdojo.com/api/interviewChallenge',
       method: 'GET'
     }).success(function(data) {
-      console.log(data);
       for (var i=0 ; i<data.awards.length; i++) {
         var award = data.awards[i];
         //initialize empty objects for student and time details
@@ -22,7 +21,7 @@ app.controller('load', function($http, $scope) {
         }
         //fill in student details
         if (!(award.student in $scope.classes[award.classroom].students)) {
-          $scope.classes[award.classroom].students[award.student]={};
+          $scope.classes[award.classroom].students[award.student] = {};
           $scope.classes[award.classroom].students[award.student].count = 1;
           if (award.weight>0) {
             $scope.classes[award.classroom].students[award.student].good = award.weight;
@@ -46,25 +45,25 @@ app.controller('load', function($http, $scope) {
           $scope.classes[award.classroom].times.bad[moment(award.date).format('H')] -= award.weight;
         }
       }
-
-      console.log($scope.classes);
-
-      //remove waiting animation
+      //remove waiting animation when loaded
       document.getElementsByClassName('spinner')[0].remove();
-
     });
 
     $scope.createTimeline = function(name, content) {
       var nums=[];
+      //create time labels
       for (var i=0; i<24; i++) {
         nums.push(moment(i, 'H').format('h a'));
       }
-      var options = {
-        scaleFontFamily: "'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
-      };
+      //set up canvas
       var ctx = document.getElementById(name).getContext("2d");
       ctx.canvas.width = window.innerWidth/1.2;
       ctx.canvas.height = 300;
+      //set up options and chart data
+      var options = {
+        scaleFontFamily: "'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        scaleIntegersOnly: true
+      };
       var data = {
         labels: nums,
         datasets: [
@@ -91,8 +90,5 @@ app.controller('load', function($http, $scope) {
       };
       var lineChart = new Chart(ctx).Line(data, options);
     };
-
   };
-
-
 });
