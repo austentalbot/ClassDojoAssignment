@@ -12,7 +12,13 @@ app.controller('load', function($http, $scope) {
         var award = data.awards[i];
         //initialize empty objects for student and time details
         if (!(award.classroom in $scope.classes)) {
-          $scope.classes[award.classroom]={students: {}, times: Array.apply(null, new Array(24)).map(Number.prototype.valueOf,0)}
+          $scope.classes[award.classroom]={
+            students: {},
+            times: {
+              good: Array.apply(null, new Array(24)).map(Number.prototype.valueOf,0),
+              bad: Array.apply(null, new Array(24)).map(Number.prototype.valueOf,0)
+            }
+          };
         }
         //fill in student details
         if (!(award.student in $scope.classes[award.classroom].students)) {
@@ -24,61 +30,60 @@ app.controller('load', function($http, $scope) {
           $scope.classes[award.classroom].students[award.student].score += award.weight;
         }
         //fill in time details
-        $scope.classes[award.classroom].times[moment(award.date).format('H')] += award.weight;
+        if (award.weight>=0) {
+          $scope.classes[award.classroom].times.good[moment(award.date).format('H')] += award.weight;
+        } else {
+          $scope.classes[award.classroom].times.bad[moment(award.date).format('H')] -= award.weight;
+        }
       };
 
       console.log($scope.classes);
-    
-      // var nums=[];
-      // for (var i=0; i<24; i++) {
-      //   nums.push(moment(i, 'H').format('h a'));
-      // }
-      // var ctx = document.getElementById("myChart").getContext("2d");
-      // var data = {
-      //     labels: nums,
-      //     datasets: [
-      //         {
-      //             label: "My First dataset",
-      //             fillColor: "rgba(220,220,220,0.2)",
-      //             strokeColor: "rgba(220,220,220,1)",
-      //             pointColor: "rgba(220,220,220,1)",
-      //             pointStrokeColor: "#fff",
-      //             pointHighlightFill: "#fff",
-      //             pointHighlightStroke: "rgba(220,220,220,1)",
-      //             data: classes.Biology.times
-      //         }
-      //     ]
-      // };
-      // var myLineChart = new Chart(ctx).Line(data);
 
     });
 
-    $scope.createChart = function(name, content) {
+    $scope.createTimeline = function(name, content) {
       var nums=[];
       for (var i=0; i<24; i++) {
         nums.push(moment(i, 'H').format('h a'));
       }
+      var options = {
+        scaleFontFamily: "'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+      };
       var ctx = document.getElementById(name).getContext("2d");
       var data = {
           labels: nums,
           datasets: [
               {
-                  label: "My First dataset",
-                  fillColor: "rgba(220,220,220,0.2)",
-                  strokeColor: "rgba(220,220,220,1)",
-                  pointColor: "rgba(220,220,220,1)",
+                  label: 'weighted good behavior',
+                  fillColor: "rgba(68,191,135,0.2)",
+                  strokeColor: "rgba(68,191,135,1)",
+                  pointColor: "rgba(68,191,135,1)",
                   pointStrokeColor: "#fff",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: content.times
+                  data: content.times.good
+              }, {
+                  label: 'weighted bad behavior',
+                  fillColor: "rgba(242,154,63,0.2)",
+                  strokeColor: "rgba(242,154,63,1)",
+                  pointColor: "rgba(242,154,63,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: content.times.bad
               }
           ]
       };
-      var myLineChart = new Chart(ctx).Line(data);
+      var lineChart = new Chart(ctx).Line(data, options);
     };
 
-
-
+    $scope.showStudents = function(name, content) {
+      var student;
+      for (var i=0; i<content.students.length; i++) {
+        student = students[i];
+        console.log(student);
+      }
+    };
 
   };
 

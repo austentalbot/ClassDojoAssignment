@@ -11,19 +11,41 @@
     body {
       font-family: 'Open Sans';
     }
+    .goodSquare {
+      width: 20px;
+      height: 20px;
+      background-color: #44BF87;
+      float: left;
+    }
+    .badSquare {
+      width: 20px;
+      height: 20px;
+      background-color: #F29A3F;
+      float: left;
+    }
+    .goodLabel {
+      color: #44BF87;
+    }
+    .badLabel {
+      color: #F29A3F;
+    }
   </style>
 <head>
 </head>
 <body>
   <div ng-app='dojo' ng-controller='load' ng-init='queryDojo()'>
+    <h3>Aggregate good and bad behavior by time of day</h3>
+    <div class='goodSquare'></div> <div class='goodLabel'>Good behavior</div>
+    <div class='badSquare'></div> <div class='badLabel'>Bad behavior</div>
     <ul ng-repeat='(course, content) in classes'>
-      <!-- <div>{{book.text_reviews_count[0]._}} Reviews</div> -->
       <div>{{course}}</div>
-      <canvas id={{course}} width="300" height="100"></canvas>
-      {{createChart(course, content)}}
+      <canvas id={{course}} width={{document.documentElement.clientWidth/2.5}} height="100"></canvas>
+      {{createTimeline(course, content)}}
+      <ul ng-repeat='(name, scores) in content.students'>
+        <li>{{name}}</li>
+      </ul>
 
     </ul>
-    <!-- <canvas id="myChart" width="600" height="400"></canvas> -->
   </div>
 </body>
 </html>
