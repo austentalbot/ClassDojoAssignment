@@ -24,10 +24,20 @@ app.controller('load', function($http, $scope) {
         if (!(award.student in $scope.classes[award.classroom].students)) {
           $scope.classes[award.classroom].students[award.student]={};
           $scope.classes[award.classroom].students[award.student].count = 1;
-          $scope.classes[award.classroom].students[award.student].score = award.weight;
+          if (award.weight>0) {
+            $scope.classes[award.classroom].students[award.student].good = award.weight;
+            $scope.classes[award.classroom].students[award.student].bad = 0;
+          } else {
+            $scope.classes[award.classroom].students[award.student].good = 0;
+            $scope.classes[award.classroom].students[award.student].bad = award.weight*-1;
+          }
         } else {
           $scope.classes[award.classroom].students[award.student].count++;
-          $scope.classes[award.classroom].students[award.student].score += award.weight;
+          if (award.weight>0) {
+            $scope.classes[award.classroom].students[award.student].good += award.weight;
+          } else {
+            $scope.classes[award.classroom].students[award.student].bad -= award.weight;
+          }
         }
         //fill in time details
         if (award.weight>=0) {
@@ -77,13 +87,6 @@ app.controller('load', function($http, $scope) {
       var lineChart = new Chart(ctx).Line(data, options);
     };
 
-    $scope.showStudents = function(name, content) {
-      var student;
-      for (var i=0; i<content.students.length; i++) {
-        student = students[i];
-        console.log(student);
-      }
-    };
 
   };
 

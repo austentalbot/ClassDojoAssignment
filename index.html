@@ -42,7 +42,7 @@
       <canvas id={{course}} width={{document.documentElement.clientWidth/2.5}} height="100"></canvas>
       {{createTimeline(course, content)}}
       <ul ng-repeat='(name, scores) in content.students'>
-        <li>{{name}}</li>
+        <li>{{name}}: <span class='goodLabel'> {{scores.good}}</span> | <span class='badLabel'>{{scores.bad}}</span></li>
       </ul>
 
     </ul>
