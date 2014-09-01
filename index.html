@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
+<head>
   <script src="./bower_components/angular/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
-
   <link rel="stylesheet" href="style.css"/>
   <script src="app.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-  
-<head>
 </head>
 <body>
   <div ng-app='dojo' ng-controller='load' ng-init='queryDojo()'>
@@ -27,6 +25,7 @@
       <div ng-show='showDetails'>
         <h4>Classroom <span class='goodLabel'>good</span> and <span class='badLabel'>bad</span> behavior by time of day</h4>
         <canvas id={{course}}></canvas>
+        <div class='rotate'> total class awards </div>
         {{createTimeline(course, content)}}
         <h4>Student <span class='goodLabel'>good</span> and <span class='badLabel'>bad</span> behavior breakdown</h4>
         <ul ng-repeat='(name, scores) in content.students'>
