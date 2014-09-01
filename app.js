@@ -45,9 +45,12 @@ app.controller('load', function($http, $scope) {
         } else {
           $scope.classes[award.classroom].times.bad[moment(award.date).format('H')] -= award.weight;
         }
-      };
+      }
 
       console.log($scope.classes);
+
+      //remove waiting animation
+      document.getElementsByClassName('spinner')[0].remove();
 
     });
 
@@ -63,28 +66,28 @@ app.controller('load', function($http, $scope) {
       ctx.canvas.width = 600;
       ctx.canvas.height = 300;
       var data = {
-          labels: nums,
-          datasets: [
-              {
-                  label: 'weighted good behavior',
-                  fillColor: "rgba(68,191,135,0.2)",
-                  strokeColor: "rgba(68,191,135,1)",
-                  pointColor: "rgba(68,191,135,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: content.times.good
-              }, {
-                  label: 'weighted bad behavior',
-                  fillColor: "rgba(242,154,63,0.2)",
-                  strokeColor: "rgba(242,154,63,1)",
-                  pointColor: "rgba(242,154,63,1)",
-                  pointStrokeColor: "#fff",
-                  pointHighlightFill: "#fff",
-                  pointHighlightStroke: "rgba(220,220,220,1)",
-                  data: content.times.bad
-              }
-          ]
+        labels: nums,
+        datasets: [
+          {
+            label: 'weighted good behavior',
+            fillColor: "rgba(68,191,135,0.2)",
+            strokeColor: "rgba(68,191,135,1)",
+            pointColor: "rgba(68,191,135,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: content.times.good
+          }, {
+            label: 'weighted bad behavior',
+            fillColor: "rgba(242,154,63,0.2)",
+            strokeColor: "rgba(242,154,63,1)",
+            pointColor: "rgba(242,154,63,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: content.times.bad
+          }
+        ]
       };
       var lineChart = new Chart(ctx).Line(data, options);
     };
