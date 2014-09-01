@@ -7,6 +7,7 @@ app.controller('load', function($http, $scope) {
       url: 'http://teach.classdojo.com/api/interviewChallenge',
       method: 'GET'
     }).success(function(data) {
+      console.log(data);
       for (var i=0 ; i<data.awards.length; i++) {
         var award = data.awards[i];
         //initialize empty objects for student and time details
@@ -62,7 +63,10 @@ app.controller('load', function($http, $scope) {
       //set up options and chart data
       var options = {
         scaleFontFamily: "'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-        scaleIntegersOnly: true
+        scaleOverride: true,
+        scaleSteps: 10,
+        scaleStepWidth: Math.ceil(Math.max.apply(null, content.times.good.concat(content.times.bad)) / 10),
+        scaleStartValue: 0
       };
       var data = {
         labels: nums,
